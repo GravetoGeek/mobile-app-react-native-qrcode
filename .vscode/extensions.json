@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "dzhavat.bracket-pair-toggler",
+        "donjayamanne.githistory",
+        "firsttris.vscode-jest-runner",
+        "pkief.material-icon-theme",
+        "EditorConfig.EditorConfig"
+    ]
+}
