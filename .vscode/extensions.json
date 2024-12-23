@@ -6,6 +6,7 @@
         "donjayamanne.githistory",
         "firsttris.vscode-jest-runner",
         "pkief.material-icon-theme",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "humao.rest-client"
     ]
 }
