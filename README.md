@@ -9,58 +9,34 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [openjdk-21-jdk](https://openjdk.org/projects/jdk/21/)
+- [Android Studio](https://developer.android.com/studio)
+- [Android SDK](https://developer.android.com/studio)
+- [Visual Studio Code](https://code.visualstudio.com/)
+
 
 ## Instalação do Backend
 1. Clone o repositório
-```bash
-git clone https://github.com/GravetoGeek/mobile-app-react-native-qrcode.git
-```
-
-2. Entre na pasta do projeto
-```bash
-cd mobile-app-react-native-qrcode/backend
-```
-3. Instale as dependências
-```bash
-npm install
-```
-4. Suba os containers do docker
-```bash
-docker compose up
-```
-5. Abra um novo terminal e rode as migrations
-```bash
-npm run migrations
-```
-6. Inicie o Prisma Studio
-```bash
-npm run studio
-```
-
-
-## Instalação do Frontend
-
-1. Entre na pasta do projeto:
     ```bash
-    cd mobile-app-react-native-qrcode
+    git clone https://github.com/GravetoGeek/mobile-app-react-native-qrcode.git
     ```
 
-2. Instale as dependências:
+2. Entre na pasta do projeto
+    ```bash
+    cd mobile-app-react-native-qrcode/backend
+    ```
+3. Instale as dependências
     ```bash
     npm install
     ```
-
-3. Suba os containers do Docker:
+4. Suba os containers do docker
     ```bash
-    docker-compose up
+    docker compose up
     ```
-
-4. Abra um novo terminal e rode as migrações:
+5. Abra um novo terminal e rode as migrations
     ```bash
-    npm run migration
+    npm run migrations
     ```
-
-5. Inicie o Prisma Studio:
+6. Inicie o Prisma Studio
     ```bash
     npm run studio
     ```
@@ -74,6 +50,30 @@ No diretório `backend`, você pode executar os seguintes scripts:
 - `npm run dist`: Limpa a pasta `dist` e `node_modules`.
 - `npm run migration`: Executa as migrações do Prisma dentro do container Docker.
 - `npm run studio`: Inicia o Prisma Studio dentro do container Docker na porta 5555.
+
+
+## Instalação do Frontend
+
+1. Entre na pasta do projeto:
+    ```bash
+    cd mobile-app-react-native-qrcode/frontend
+    ```
+
+2. Instale as dependências:
+    ```bash
+    npm install
+    ```
+
+3. Execute o projeto:
+    ```bash
+    npm run start
+    ```
+
+4. Escolha a opção `Run on Android device/emulator` para rodar o aplicativo em um dispositivo ou emulador Android.
+É necessário que o Android Studio esteja configurado corretamente e o dispositivo/emulador esteja conectado.
+A variável de ambiente `ANDROID_HOME` deve estar configurada para o diretório do Android SDK.
+
+
 
 ## Estrutura do Projeto
 
