@@ -1,5 +1,7 @@
 FROM node:22-alpine
 
+# USER node
+
 WORKDIR /backend
 
 COPY package*.json ./
@@ -8,8 +10,10 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
-
-EXPOSE 3000
+RUN npx prisma generate
 
 CMD ["npm", "run", "start:dev"]
+
+# Expõe as portas do NestJS (3000) e do Prisma Studio (5555)
+EXPOSE 3000 5555
+
