@@ -1,0 +1,35 @@
+###
+GET http://localhost:3000
+content-type: application/json
+
+### QRCode
+### findAll()
+GET http://localhost:3000/qrcodes
+content-type: application/json
+
+### findOne()
+GET http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+content-type: application/json
+
+### create()
+POST http://localhost:3000/qrcodes
+content-type: application/json
+
+{
+    "type": "qr",
+    "data": "{\"type\": \"qr\", \"data\": \"https://www.google.com\"}"
+}
+
+### update()
+PATCH http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+content-type: application/json
+
+{
+    "type": "ean_13",
+    "data": "{\"type\": \"qr\", \"data\": \"https://www.google.com\"}"
+}
+
+### delete()
+DELETE http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+content-type: application/json
+
