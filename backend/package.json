@@ -22,7 +22,8 @@
         "chown": "sudo chown $(id -u):$(id -g) /filepath",
         "dist": "sudo chown $(id -u):$(id -g) /home/gravetogeek/projetos/mobile-app-react-native-qrcode/backend/dist && sudo rm -rf /home/gravetogeek/projetos/mobile-app-react-native-qrcode/backend/dist && sudo rm -rf /home/gravetogeek/projetos/mobile-app-react-native-qrcode/backend/node_modules",
         "migration": "docker exec -it backend npx prisma migrate deploy",
-        "studio": "docker exec -it backend npx prisma studio --port 5555 --hostname 0.0.0.0"
+        "studio": "docker exec -it backend npx prisma studio --port 5555 --hostname 0.0.0.0",
+        "reset": "docker compose down -v && docker system prune -a -f && npm run dist"
     },
     "dependencies": {
         "@nestjs/axios": "^3.1.3",
