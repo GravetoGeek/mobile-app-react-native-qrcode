@@ -28,15 +28,17 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
     ```bash
     npm install
     ```
-4. Suba os containers do docker
+4. Configure o arquivo .env
+
+5. Suba os containers do docker
     ```bash
     docker compose up
     ```
-5. Abra um novo terminal e rode as migrations
+6. Abra um novo terminal e rode as migrations
     ```bash
     npm run migrations
     ```
-6. Inicie o Prisma Studio
+7. Inicie o Prisma Studio
     ```bash
     npm run studio
     ```
@@ -63,13 +65,14 @@ No diretório `backend`, você pode executar os seguintes scripts:
     ```bash
     npm install
     ```
+3. Configure o arquivo .env
 
-3. Execute o projeto:
+4. Execute o projeto:
     ```bash
     npm run start
     ```
 
-4. Escolha a opção `Run on Android device/emulator` para rodar o aplicativo em um dispositivo ou emulador Android.
+5. Escolha a opção `Run on Android device/emulator` para rodar o aplicativo em um dispositivo ou emulador Android.
 É necessário que o Android Studio esteja configurado corretamente e o dispositivo/emulador esteja conectado.
 A variável de ambiente `ANDROID_HOME` deve estar configurada para o diretório do Android SDK.
 
