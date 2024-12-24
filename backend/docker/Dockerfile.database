@@ -1,0 +1,19 @@
+# Usa a imagem oficial do PostgreSQL como base
+FROM postgres:latest
+
+# Declara argumentos para o build
+ARG POSTGRES_USER
+ARG POSTGRES_PASSWORD
+ARG POSTGRES_DB
+
+# Usa os argumentos para definir variáveis de ambiente
+ENV POSTGRES_USER=$POSTGRES_USER
+ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+ENV POSTGRES_DB=$POSTGRES_DB
+
+# Copia os scripts de inicialização para o contêiner
+# O PostgreSQL executa automaticamente qualquer arquivo SQL ou script no diretório /docker-entrypoint-initdb.d
+COPY ../../src/database/driven-adapters/prisma/migrations/20241222213734_init/migration.sql /docker-entrypoint-initdb.d/
+
+# Expõe a porta padrão do PostgreSQL
+EXPOSE 5432
