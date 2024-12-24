@@ -8,12 +8,19 @@ import {useQRScanner} from '../hooks/useQRScanner';
 import qrCodeScannerStyle from '../styles/screens/qrCodeScannerStyle';
 import {QRCodeScannerScreenNavigationProp} from '../types';
 
+/**
+ * Componente da tela de escaneamento de QRCode.
+ *
+ * @param {Object} props - Propriedades do componente.
+ * @param {QRCodeScannerScreenNavigationProp} props.navigation - Propriedade de navegação para navegar entre as telas.
+ * @returns {JSX.Element} JSX Elemento representando a tela de escaneamento de QRCode.
+ */
 const QRCodeScanner: React.FC<{navigation: QRCodeScannerScreenNavigationProp}> = ({navigation: _navigation}) => {
     const device = useCameraDevice('back');
-    const {scannedData,isScanning,resetScanner,codeScanner} = useQRScanner();
+    const {scannedData, isScanning, resetScanner, codeScanner} = useQRScanner();
 
     // Retorno antecipado para quando o dispositivo não estiver disponível
-    if(!device) {
+    if (!device) {
         return (
             <View style={qrCodeScannerStyle.centered}>
                 <Text>Camera Not Found</Text>
@@ -33,11 +40,9 @@ const QRCodeScanner: React.FC<{navigation: QRCodeScannerScreenNavigationProp}> =
             ) : (
                 <View>
                     <Text style={qrCodeScannerStyle.resultText}>Dados do código de Barras/QRCode:</Text>
-                    <Text style={qrCodeScannerStyle.resultText}>{JSON.stringify(scannedData,null,2)}</Text>
+                    <Text style={qrCodeScannerStyle.resultText}>{JSON.stringify(scannedData, null, 2)}</Text>
                     <Button title="Scan Again" onPress={resetScanner} />
                 </View>
-
-
             )}
         </ContentWrapper>
     );

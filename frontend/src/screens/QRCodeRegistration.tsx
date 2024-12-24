@@ -7,7 +7,7 @@ import qrCodeRegistrationStyle from '../styles/screens/qrCodeRegistrationStyle';
 import {QRCodeRegistrationScreenNavigationProp} from '../types';
 
 const codeTypes = [
-    {label: 'QR',value: 'qr'},
+    {label: 'QR', value: 'qr'},
     // {label: 'EAN-13',value: 'ean_13'},
     // {label: 'EAN-8',value: 'ean_8'},
     // {label: 'Aztec',value: 'aztec'},
@@ -22,14 +22,24 @@ const codeTypes = [
     // {label: 'UPC-E',value: 'upc_e'},
 ];
 
+/**
+ * Componente da tela de registro de QRCode.
+ *
+ * @param {Object} props - Propriedades do componente.
+ * @param {QRCodeRegistrationScreenNavigationProp} props.navigation - Propriedade de navegação para navegar entre as telas.
+ * @returns {JSX.Element} JSX Elemento representando a tela de registro de QRCode.
+ */
 const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigationProp}> = ({navigation: _navigation}) => {
-    const [codeData,setCodeData] = useState('');
-    const [description,setDescription] = useState('');
-    const [codeType,setCodeType] = useState('qr');
-    const [attributes,setAttributes] = useState([{key: '',value: ''}]);
-    const [modalVisible,setModalVisible] = useState(false);
-    const [qrData,setQrData] = useState('');
+    const [codeData, setCodeData] = useState('');
+    const [description, setDescription] = useState('');
+    const [codeType, setCodeType] = useState('qr');
+    const [attributes, setAttributes] = useState([{key: '', value: ''}]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [qrData, setQrData] = useState('');
 
+    /**
+     * Função para registrar o QRCode no backend.
+     */
     const handleRegister = async () => {
         try {
             const payload = {
@@ -42,24 +52,40 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
             };
             const response = await createQRCode(payload);
             console.log({response});
-            Alert.alert('Sucesso','QR Code registrado com sucesso!');
+            Alert.alert('Sucesso', 'QR Code registrado com sucesso!');
             setQrData('');
             // Adicione qualquer lógica adicional após o registro bem-sucedido
-        } catch(error) {
-            Alert.alert('Erro','Não foi possível registrar o QR Code.');
+        } catch (error) {
+            Alert.alert('Erro', 'Não foi possível registrar o QR Code.');
         }
     };
 
+    /**
+     * Função para adicionar um novo campo de atributo.
+     */
     const handleAddAttribute = () => {
-        setAttributes([...attributes,{key: '',value: ''}]);
+        setAttributes([...attributes, {key: '', value: ''}]);
     };
 
-    const handleAttributeChange = (index: number,key: string,value: string) => {
+    /**
+     * Função para atualizar o valor de um atributo específico.
+     *
+     * @param {number} index - Índice do atributo a ser atualizado.
+     * @param {string} key - Chave do atributo.
+     * @param {string} value - Valor do atributo.
+     */
+    const handleAttributeChange = (index: number, key: string, value: string) => {
         const newAttributes = [...attributes];
-        newAttributes[index] = {key,value};
+        newAttributes[index] = {key, value};
         setAttributes(newAttributes);
     };
 
+    /**
+     * Função para renderizar um item da lista de tipos de código.
+     *
+     * @param {Object} item - Item da lista.
+     * @returns {JSX.Element} JSX Elemento representando o item da lista.
+     */
     const renderCodeTypeItem = ({item}) => (
         <TouchableOpacity
             style={qrCodeRegistrationStyle.pickerItem}
@@ -94,7 +120,7 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
                 />
 
                 <TouchableOpacity
-                    style={[qrCodeRegistrationStyle.input,qrCodeRegistrationStyle.selectButton]}
+                    style={[qrCodeRegistrationStyle.input, qrCodeRegistrationStyle.selectButton]}
                     onPress={() => setModalVisible(true)}
                 >
                     <Text style={qrCodeRegistrationStyle.selectButtonText}>
@@ -120,21 +146,21 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
                     </View>
                 </Modal>
 
-                {attributes.map((attribute,index) => (
+                {attributes.map((attribute, index) => (
                     <View key={index} style={qrCodeRegistrationStyle.attributeContainer}>
                         <TextInput
-                            style={[qrCodeRegistrationStyle.input,qrCodeRegistrationStyle.attributeInput]}
+                            style={[qrCodeRegistrationStyle.input, qrCodeRegistrationStyle.attributeInput]}
                             placeholder="Chave"
                             placeholderTextColor="#888"
                             value={attribute.key}
-                            onChangeText={(text) => handleAttributeChange(index,text,attribute.value)}
+                            onChangeText={(text) => handleAttributeChange(index, text, attribute.value)}
                         />
                         <TextInput
-                            style={[qrCodeRegistrationStyle.input,qrCodeRegistrationStyle.attributeInput]}
+                            style={[qrCodeRegistrationStyle.input, qrCodeRegistrationStyle.attributeInput]}
                             placeholder="Valor"
                             placeholderTextColor="#888"
                             value={attribute.value}
-                            onChangeText={(text) => handleAttributeChange(index,attribute.key,text)}
+                            onChangeText={(text) => handleAttributeChange(index, attribute.key, text)}
                         />
                     </View>
                 ))}
