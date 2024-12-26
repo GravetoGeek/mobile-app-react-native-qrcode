@@ -8,7 +8,7 @@ GET http://localhost:3000/qrcodes
 content-type: application/json
 
 ### findOne()
-GET http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+GET http://localhost:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
 
 ### create()
@@ -21,7 +21,7 @@ content-type: application/json
 }
 
 ### update()
-PATCH http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+PATCH http://localhost:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
 
 {
@@ -30,7 +30,7 @@ content-type: application/json
 }
 
 ### delete()
-DELETE http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+DELETE http://localhost:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
 
 
@@ -59,7 +59,7 @@ content-type: application/json
 }
 
 ### update()
-PATCH http://34.67.177.44:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+PATCH http://34.67.177.44:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
 
 {
@@ -68,5 +68,5 @@ content-type: application/json
 }
 
 ### delete()
-DELETE http://34.67.177.44:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+DELETE http://34.67.177.44:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
