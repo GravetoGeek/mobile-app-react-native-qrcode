@@ -1,4 +1,4 @@
-###
+### LOCALHOST
 GET http://localhost:3000
 content-type: application/json
 
@@ -17,7 +17,7 @@ content-type: application/json
 
 {
     "type": "qr",
-    "data": "{\"type\": \"qr\", \"data\": \"https://www.google.com\"}"
+    "data": "{type: 'qr', data: 'https://www.google.com'}"
 }
 
 ### update()
@@ -33,3 +33,40 @@ content-type: application/json
 DELETE http://localhost:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
 content-type: application/json
 
+
+
+### Google Cloud
+GET http://34.67.177.44:3000
+content-type: application/json
+
+### QRCode
+### findAll()
+GET http://34.67.177.44:3000/qrcodes
+content-type: application/json
+
+### findOne()
+GET http://34.67.177.44:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
+content-type: application/json
+
+### create()
+####Parâmetro data deve ser um JSON stringificado.
+POST http://34.67.177.44:3000/qrcodes
+content-type: application/json
+
+{
+    "type": "qr",
+    "data": "{\"type\": \"qr\", \"data\": \"https://www.google.com\"}"
+}
+
+### update()
+PATCH http://34.67.177.44:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+content-type: application/json
+
+{
+    "type": "ean_13",
+    "data": "{\"type\": \"qr\", \"data\": \"https://www.google.com\"}"
+}
+
+### delete()
+DELETE http://34.67.177.44:3000/qrcodes/f921cc1a-e029-493a-a887-4c55dab2b854
+content-type: application/json
