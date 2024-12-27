@@ -10,7 +10,7 @@ function App(): React.JSX.Element {
     const Stack = createNativeStackNavigator<RootStackParamList>();
     return (
         <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator id={undefined}>
                     <Stack.Screen name="Home" component={Home} options={{title: 'Welcome',headerShown: true}} />
                     <Stack.Screen name="QRCodeScanner" component={QRCodeScanner} options={{title: 'QRCode Scanner',headerShown: true}} />
                     <Stack.Screen name="QRCodeRegistration" component={QRCodeRegistration} options={{title: 'QRCode Registration',headerShown: true}} />

@@ -1,6 +1,6 @@
 // src/screens/QRCodeScanner.tsx
 import React from 'react';
-import {StyleSheet,Text,View} from 'react-native';
+import {Alert,StyleSheet,Text,View} from 'react-native';
 import {Camera,useCameraDevice} from 'react-native-vision-camera';
 import ContentWrapper from '../components/organisms/ContentWrapper';
 import ShowQrcodeData from '../components/organisms/ShowQrcodeData';
@@ -37,6 +37,10 @@ const QRCodeScanner: React.FC<{navigation: QRCodeScannerScreenNavigationProp}> =
                     device={device}
                     isActive={true}
                     codeScanner={codeScanner}
+                    onError={(error) => {
+                        console.error('Erro na câmera:', error);
+                        Alert.alert('Erro', 'Não foi possível iniciar a câmera. Por favor, tente novamente mais tarde.');
+                    }}
                 />
             ) :
                 <ShowQrcodeData

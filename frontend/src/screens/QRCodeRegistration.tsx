@@ -10,18 +10,6 @@ import {QRCodeRegistrationScreenNavigationProp} from '../types';
 
 const codeTypes = [
     {label: 'QR',value: 'qr'},
-    // {label: 'EAN-13',value: 'ean_13'},
-    // {label: 'EAN-8',value: 'ean_8'},
-    // {label: 'Aztec',value: 'aztec'},
-    // {label: 'Codabar',value: 'codabar'},
-    // {label: 'Code-128',value: 'code_128'},
-    // {label: 'Code-39',value: 'code_39'},
-    // {label: 'Code-93',value: 'code_93'},
-    // {label: 'Data-Matrix',value: 'data_matrix'},
-    // {label: 'ITF',value: 'itf'},
-    // {label: 'PDF-417',value: 'pdf_417'},
-    // {label: 'UPC-A',value: 'upc_a'},
-    // {label: 'UPC-E',value: 'upc_e'},
 ];
 
 /**
@@ -33,20 +21,25 @@ const codeTypes = [
  */
 const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigationProp}> = ({navigation: _navigation}) => {
     const [description,setDescription] = useState('');
+    const [camposAdicionais,setCamposAdicionais] = useState(false);
     const [codeType,setCodeType] = useState('qr');
-    const [attributes,setAttributes] = useState([{key: '',value: ''}]);
+    const [attributes,setAttributes] = useState<Attribute[]>([]);
     const [modalVisible,setModalVisible] = useState(false);
     const [qrData,setQrData] = useState(null);
     let qrCodeRef = null;
 
 
-    function transformJson(input) {
+    interface Attribute {
+        key: string;
+        value: string;
+    }
 
+    function transformJson(input: Attribute[]): Record<string,unknown> {
         // Reduz o array para um único objeto com as chaves e valores correspondentes
         const transformed = input.reduce((acc,item) => {
             acc[item.key] = item.value;
             return acc;
-        },{});
+        },{} as Record<string,unknown>);
 
         // Retorna um objeto
         return transformed;
@@ -56,24 +49,44 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
      * Função para registrar o QRCode no backend.
      */
     const handleRegister = async () => {
-        try {
-            let json = transformJson(attributes);
-            json.description = description;
-            const payload = {
-                type: codeType,
-                data: JSON.stringify(json),
-            };
+        try{
+            let payload: {type: string; data: any} = {type: '',data: null};
+
+            if(camposAdicionais) {
+                if(attributes.some(({key,value}) => !key || !value)) {
+                    Alert.alert('Erro','Por favor, preencha todos os campos antes de registrar o QR Code.');
+                    return;
+                }
+                payload.type = codeType;
+                payload.data = transformJson(attributes);
+                payload.data.description = description;
+                payload.data = JSON.stringify(payload.data);
 
 
-            const data = await createQRCode(payload);
+            }
+            else {
+                payload = {
+                    type: codeType,
+                    data: description,
+                };
+            }
 
+
+            const response = await createQRCode(payload);
+
+            if(response.status !== 201) {
+                let error = await response.json();
+                if(error?.message) {
+                    error = error.message;
+                    Alert.alert('Erro ao registrar QR Code.');
+                }
+            }
+
+            const responseData = await response.json();
             Alert.alert('Sucesso','QR Code registrado com sucesso!');
-
-            setQrData(data);
-            // Adicione qualquer lógica adicional após o registro bem-sucedido
+            setQrData(responseData.data);
         } catch(error) {
-            Alert.alert('Erro',JSON.stringify(error));
-            // Alert.alert('Erro', 'Não foi possível registrar o QR Code.');
+            Alert.alert('Erro na rede, verifique sua conexão e tente novamente.');
         }
     };
 
@@ -81,6 +94,7 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
      * Função para adicionar um novo campo de atributo.
      */
     const handleAddAttribute = () => {
+        setCamposAdicionais(true);
         setAttributes([...attributes,{key: '',value: ''}]);
     };
 
@@ -117,8 +131,9 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
 
     const handleDownloadQRCode = async () => {
         if (qrCodeRef) {
-            qrCodeRef.toDataURL(async (data) => {
-                const path = `${RNFS.DownloadDirectoryPath}/qrcode.png`;
+            qrCodeRef.toDataURL(async (data: any) => {
+                let fileName = `qrcode-${new Date().getTime()}.png`;
+                const path: string = `${RNFS.DownloadDirectoryPath}/${fileName}`;
                 try {
                     await RNFS.writeFile(path, data, 'base64');
                     Alert.alert('Sucesso', `QR Code salvo em: ${path}`);
@@ -126,8 +141,9 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
                     Alert.alert('Erro', 'Não foi possível salvar a imagem.');
                 }
             });
+        } else {
+            Alert.alert('Erro', 'QR Code não está disponível para download.');
         }
-
     };
 
     return (
@@ -195,8 +211,8 @@ const QRCodeRegistration: React.FC<{navigation: QRCodeRegistrationScreenNavigati
                     <View style={qrCodeRegistrationStyle.qrCodeImage}>
                         <TouchableOpacity onPress={handleDownloadQRCode}>
                             <QRCode
-                                value={JSON.stringify(qrData)}
-                                size={250}
+                                value={qrData}
+                                size={400}
                                 getRef={(ref) => (qrCodeRef = ref)}
                             />
                         </TouchableOpacity>
