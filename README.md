@@ -48,12 +48,16 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
     O Prisma Studio será aberto em seu navegador padrão na porta 5555. Você pode visualizar e gerenciar os dados do banco de dados usando a interface do Prisma Studio.
 
+    ![Prisma Studio](./documentationFiles/prisma-studio-img-001.png)
+
 7. Acessar a documentação da API
     ```bash
     http://localhost:3000/docs
     ```
 
     A documentação da API será aberta em seu navegador padrão. Você pode visualizar e testar os endpoints da API usando a interface do Swagger.
+
+    ![Swagger](./documentationFiles/swagger-img-001.png)
 
 ## Scripts Disponíveis
 
