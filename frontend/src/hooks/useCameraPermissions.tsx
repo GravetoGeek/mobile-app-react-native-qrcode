@@ -14,7 +14,7 @@ export const useCameraPermissions = () => {
                 setPermissionGranted(true);
             }
         })();
-    },[]);
+    },[hasPermission,requestPermission]);
 
     return permissionGranted;
 };

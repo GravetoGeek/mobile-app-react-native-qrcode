@@ -30,7 +30,7 @@ export const useQRScanner = (): UseQRScannerResult => {
         ],
         onCodeScanned: (codes: Code[]) => {
             if (codes.length > 0 && isScanning) {
-                const firstCode = codes[0] || 'No data';
+                const firstCode = codes[0];
                 setScannedData(firstCode);
                 setIsScanning(false); // Pausa o scanner após a leitura bem-sucedida
             }

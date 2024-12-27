@@ -5,7 +5,8 @@
         "jsx": "react-native",
         "esModuleInterop": true,
         "types": [
-            "@types/react-native-dotenv"
+            "@types/react-native-dotenv",
+            "jest"
         ],
         "typeRoots": [
             "./node_modules/@types",
