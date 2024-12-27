@@ -2,7 +2,7 @@ import {BarcodeController} from '@/barcode/driving-adapters/controllers/barcode.
 import {BarcodeService} from '@/barcode/driving-adapters/services/barcode.service';
 import {PrismaService} from '@/database/database.module';
 import {Module} from '@nestjs/common';
-import {barcodePrismaAdapter} from './driving-adapters/services/barcode-prisma-adapter';
+import {barcodePrismaAdapter} from './driven-adapters/prisma/barcode-prisma-adapter';
 import {barcodeProvider} from './providers/barcode.provider';
 
 @Module({

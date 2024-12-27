@@ -12,6 +12,8 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
+import {ApiOkResponse,ApiOperation} from '@nestjs/swagger';
+import {barcodeType} from '@prisma/client';
 
 /**
  * A Controller atua como um "driving adapter" (HTTP).
@@ -25,16 +27,22 @@ export class BarcodeController {
     ) {}
 
     @Post()
+    @ApiOperation({summary: 'Criar um novo QR Code'})
+    @ApiOkResponse({ type: CreateBarcodeDto })
     async create(@Body() dto: CreateBarcodeDto) {
         return this.barcodeService.createBarcode(dto);
     }
 
     @Get()
+    @ApiOperation({summary: 'Listar todos os QR Codes'})
+    @ApiOkResponse({ type: [CreateBarcodeDto] })
     async findAll() {
         return this.barcodeService.findAll();
     }
 
     @Get(':id')
+    @ApiOperation({summary: 'Buscar um QR Code pelo ID'})
+    @ApiOkResponse({ type: CreateBarcodeDto })
     async findOne(@Param('id') id: string) {
         const qrCode=await this.barcodeService.findOne(id);
         if(!qrCode) {
@@ -44,11 +52,15 @@ export class BarcodeController {
     }
 
     @Patch(':id')
+    @ApiOperation({summary: 'Atualizar um QR Code pelo ID'})
+    @ApiOkResponse({ type: CreateBarcodeDto })
     async update(@Param('id') id: string,@Body() dto: UpdateBarcodeDto) {
         return this.barcodeService.updateBarcode(id,dto);
     }
 
     @Delete(':id')
+    @ApiOperation({summary: 'Deletar um QR Code pelo ID'})
+    @ApiOkResponse({ type: CreateBarcodeDto })
     async delete(@Param('id') id: string) {
         return this.barcodeService.deleteBarcode(id);
     }

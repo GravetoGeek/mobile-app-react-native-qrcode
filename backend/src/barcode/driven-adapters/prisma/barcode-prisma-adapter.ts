@@ -8,7 +8,10 @@ export class barcodePrismaAdapter implements IbarcodeRepository {
     constructor(private readonly prisma: PrismaService) {}
 
     async create(barcode: barcodeEntity) {
-        return this.prisma.barcode.create({data: barcode});
+        return this.prisma.barcode.create({data: {
+            type: barcode.type,
+            data: barcode.data
+        }});
     }
 
     async findAll() {

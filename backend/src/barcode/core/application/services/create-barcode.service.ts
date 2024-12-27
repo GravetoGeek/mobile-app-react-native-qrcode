@@ -4,14 +4,14 @@ import {Injectable} from '@nestjs/common';
 import {
     CreateBarcodeInput,
     CreateBarcodeUseCase,
-} from '../ports/in/create-barcode.usecase';
+} from '../../domain/ports/create-barcode.usecase';
 
 @Injectable()
 export class CreateQRCodeService implements CreateBarcodeUseCase {
-  constructor(private readonly qrCodeRepository: IbarcodeRepository) {}
+    constructor(private readonly qrCodeRepository: IbarcodeRepository) {}
 
-  async execute(data: CreateBarcodeInput): Promise<barcodeEntity> {
-    const qrCode = new barcodeEntity({ data: data.data });
-    return this.qrCodeRepository.create(qrCode);
-  }
+    async execute(data: CreateBarcodeInput): Promise<barcodeEntity> {
+        const qrCode=new barcodeEntity({data: data.data});
+        return this.qrCodeRepository.create(qrCode);
+    }
 }

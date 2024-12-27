@@ -16,7 +16,7 @@ datasource db {
 model barcode {
     id        String   @id @default(uuid())
     type      barcodeType
-    data      Json
+    data      String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -26,7 +26,6 @@ enum barcodeType {
     ean_13
     ean_8
     aztec
-    codabar
     code_128
     code_39
     code_93
