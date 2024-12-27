@@ -34,14 +34,26 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
     ```bash
     docker compose up
     ```
-6. Abra um novo terminal e rode as migrations
-    ```bash
-    npm run migrations
-    ```
-7. Inicie o Prisma Studio
+    Serão iniciados os seguintes containers:
+
+    - `backend`: Servidor Node.js com o código do projeto.
+    - `database`: Banco de dados PostgreSQL para armazenar os dados da aplicação.
+    - `migrations`: Container temporário para executar as migrações do Prisma.
+
+
+6. Inicie o Prisma Studio
     ```bash
     npm run studio
     ```
+
+    O Prisma Studio será aberto em seu navegador padrão na porta 5555. Você pode visualizar e gerenciar os dados do banco de dados usando a interface do Prisma Studio.
+
+7. Acessar a documentação da API
+    ```bash
+    http://localhost:3000/docs
+    ```
+
+    A documentação da API será aberta em seu navegador padrão. Você pode visualizar e testar os endpoints da API usando a interface do Swagger.
 
 ## Scripts Disponíveis
 
@@ -75,6 +87,9 @@ No diretório `backend`, você pode executar os seguintes scripts:
 5. Escolha a opção `Run on Android device/emulator` para rodar o aplicativo em um dispositivo ou emulador Android.
 É necessário que o Android Studio esteja configurado corretamente e o dispositivo/emulador esteja conectado.
 A variável de ambiente `ANDROID_HOME` deve estar configurada para o diretório do Android SDK.
+
+Caso deseje rodar o aplicativo em um dispositivo físico, siga as instruções [aqui](https://reactnative.dev/docs/running-on-device).
+
 
 
 
