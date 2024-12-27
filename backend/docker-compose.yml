@@ -63,5 +63,12 @@ services:
   #   ports:
   #     - "6379:6379"
 
+  migration:
+    container_name: migration
+    env_file:
+      - .env
+    build: .
+    command: sh -c 'until nc -z db 5432; do echo waiting for db; sleep 1; done; npx prisma migrate deploy'
+
 volumes:
   dbdata:
