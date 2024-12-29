@@ -35,22 +35,22 @@ content-type: application/json
 
 
 
-### Google Cloud
-GET http://34.67.177.44:3000
+### Google Cloud Run
+GET https://backend-1097962137391.us-central1.run.app
 content-type: application/json
 
 ### QRCode
 ### findAll()
-GET http://34.67.177.44:3000/qrcodes
+GET https://backend-1097962137391.us-central1.run.app/qrcodes
 content-type: application/json
 
 ### findOne()
-GET http://34.67.177.44:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
+GET https://backend-1097962137391.us-central1.run.app/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
 
 ### create()
-####Parâmetro data deve ser um JSON stringificado.
-POST http://34.67.177.44:3000/qrcodes
+####Parâmetro data deve ser uma string.
+POST https://backend-1097962137391.us-central1.run.app/qrcodes
 content-type: application/json
 
 {
@@ -59,7 +59,7 @@ content-type: application/json
 }
 
 ### update()
-PATCH http://34.67.177.44:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
+PATCH https://backend-1097962137391.us-central1.run.app/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json
 
 {
@@ -68,5 +68,5 @@ content-type: application/json
 }
 
 ### delete()
-DELETE http://34.67.177.44:3000/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
+DELETE https://backend-1097962137391.us-central1.run.app/qrcodes/6fa03cd0-78d2-4988-b7f3-23214dc5a602
 content-type: application/json

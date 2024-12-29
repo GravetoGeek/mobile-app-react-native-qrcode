@@ -50,9 +50,13 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
     ![Prisma Studio](./documentationFiles/prisma-studio-img-001.png)
 
-7. Acessar a documentação da API
+7. Acessar a documentação da API localmente.
     ```bash
     http://localhost:3000/docs
+    ````
+    Versão hospedada no Google Cloud Run
+    ```bash
+    https://backend-1097962137391.us-central1.run.app/docs
     ```
 
     A documentação da API será aberta em seu navegador padrão. Você pode visualizar e testar os endpoints da API usando a interface do Swagger.
@@ -112,10 +116,6 @@ backend/
  ┃ ┣ 📂core
  ┃ ┃ ┣ 📂application
  ┃ ┃ ┃ ┣ 📂ports
- ┃ ┃ ┃ ┃ ┣ 📂in
- ┃ ┃ ┃ ┃ ┃ ┗ 📜create-barcode.usecase.ts
- ┃ ┃ ┃ ┃ ┗ 📂out
- ┃ ┃ ┃ ┃ ┃ ┗ 📜.gitkeep
  ┃ ┃ ┃ ┗ 📂services
  ┃ ┃ ┃ ┃ ┗ 📜create-barcode.service.ts
  ┃ ┃ ┗ 📂domain
@@ -123,10 +123,13 @@ backend/
  ┃ ┃ ┃ ┃ ┣ 📜barcode.entity.spec.ts
  ┃ ┃ ┃ ┃ ┗ 📜barcode.entity.ts
  ┃ ┃ ┃ ┗ 📂ports
- ┃ ┃ ┃ ┃ ┗ 📜barcode.repository.ts
+ ┃ ┃ ┃ ┃ ┣ 📜barcode.repository.ts
+ ┃ ┃ ┃ ┃ ┗ 📜create-barcode.usecase.ts
  ┃ ┣ 📂driven-adapters
- ┃ ┃ ┗ 📂config
+ ┃ ┃ ┣ 📂config
  ┃ ┃ ┃ ┗ 📜swagger.config.ts
+ ┃ ┃ ┗ 📂prisma
+ ┃ ┃ ┃ ┗ 📜barcode-prisma-adapter.ts
  ┃ ┣ 📂driving-adapters
  ┃ ┃ ┣ 📂controllers
  ┃ ┃ ┃ ┣ 📜barcode.controller.spec.ts
@@ -134,12 +137,12 @@ backend/
  ┃ ┃ ┣ 📂dtos
  ┃ ┃ ┃ ┣ 📂validators
  ┃ ┃ ┃ ┃ ┗ 📜.gitkeep
+ ┃ ┃ ┃ ┣ 📜barcode.dto.ts
  ┃ ┃ ┃ ┣ 📜create-barcode.dto.ts
  ┃ ┃ ┃ ┗ 📜update-barcode.dto.ts
  ┃ ┃ ┣ 📂gateways
  ┃ ┃ ┃ ┗ 📜.gitkeep
  ┃ ┃ ┗ 📂services
- ┃ ┃ ┃ ┣ 📜barcode-prisma-adapter.ts
  ┃ ┃ ┃ ┣ 📜barcode.service.spec.ts
  ┃ ┃ ┃ ┗ 📜barcode.service.ts
  ┃ ┣ 📂providers
@@ -204,16 +207,23 @@ frontend/
  ┃ ┣ 📂molecules
  ┃ ┃ ┗ 📜.gitkeep
  ┃ ┗ 📂organisms
- ┃ ┃ ┗ 📜ContentWrapper.tsx
+ ┃ ┃ ┣ 📜ContentWrapper.tsx
+ ┃ ┃ ┗ 📜ShowQrcodeData.tsx
  ┣ 📂contexts
  ┣ 📂hooks
+ ┃ ┣ 📜useCameraPermissions.test.tsx
  ┃ ┣ 📜useCameraPermissions.tsx
+ ┃ ┣ 📜useQRScanner.test.tsx
  ┃ ┗ 📜useQRScanner.tsx
  ┣ 📂screens
+ ┃ ┣ 📜Home.test.tsx
  ┃ ┣ 📜Home.tsx
+ ┃ ┣ 📜QRCodeRegistration.test.tsx
  ┃ ┣ 📜QRCodeRegistration.tsx
+ ┃ ┣ 📜QRCodeScanner.test.tsx
  ┃ ┗ 📜QRCodeScanner.tsx
  ┣ 📂services
+ ┃ ┗ 📜qrcodeService.ts
  ┣ 📂store
  ┣ 📂styles
  ┃ ┣ 📂components
@@ -222,9 +232,11 @@ frontend/
  ┃ ┃ ┣ 📂molecules
  ┃ ┃ ┃ ┗ 📜.gitkeep
  ┃ ┃ ┗ 📂organisms
- ┃ ┃ ┃ ┗ 📜contentWrapperStyle.tsx
+ ┃ ┃ ┃ ┣ 📜contentWrapperStyle.tsx
+ ┃ ┃ ┃ ┗ 📜showQrcodeData.tsx
  ┃ ┣ 📂screens
  ┃ ┃ ┣ 📜homeStyle.tsx
+ ┃ ┃ ┣ 📜qrCodeRegistrationStyle.ts
  ┃ ┃ ┗ 📜qrCodeScannerStyle.tsx
  ┃ ┣ 📜colors.tsx
  ┃ ┣ 📜globalStyles.tsx
